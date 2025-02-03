@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'kolla'
+ARGV[0].nil? ? Kolla.run : Kolla.run(ARGV[0])

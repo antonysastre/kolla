@@ -1,0 +1,34 @@
+# Ignore bundler-related files
+/.bundle
+/vendor/bundle
+
+# Ignore generated documentation
+/rdoc/
+/doc/
+/.yardoc/
+/coverage/
+
+# Ignore compiled C extensions
+/ext/*.o
+/ext/*.so
+/ext/*.bundle
+/lib/**/*.o
+/lib/**/*.so
+/lib/**/*.bundle
+
+# Ignore logs and temporary files
+/log/
+/tmp/
+/test/tmp/
+/spec/tmp/
+/features/tmp/
+
+# Ignore editor and OS-specific files
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore dependencies and package files
+/Gemfile.lock
+/pkg/
