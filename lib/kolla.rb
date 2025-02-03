@@ -13,7 +13,7 @@ module Kolla
     end
 
     parser = Parser.new(absolute_path)
-    parser.process
+    puts parser.process
   end
 end
 

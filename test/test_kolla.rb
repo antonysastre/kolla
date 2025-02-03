@@ -8,7 +8,13 @@ class KollaTest < Minitest::Test
   end
 
   def test_schema_parsing
-    result = Kolla.run('test/fixtures/schema.rb')
+    result = Kolla::Parser.new('test/fixtures/schema.rb').process
     assert_equal ["users", "posts"], result
+  end
+
+  def test_ignore_pattern
+    result = Kolla::Parser.new('test/fixtures/schema.rb').process
+    refute_includes result, "action_text"
+    refute_includes result, "active_storage_blobs"
   end
 end
