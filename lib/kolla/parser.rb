@@ -2,20 +2,40 @@
 
 module Kolla
   class Parser
-    def initialize(file_path)
-      @file_path = file_path
+    DEFAULT_FILE = File.join('db', 'schema.rb').freeze
+
+    def initialize(file_path: DEFAULT_FILE, options: {})
+      @file_path = File.expand_path(file_path)
+      @options = options
     end
 
-    def process
+    def run!
       content = File.read(file_path)
-      matches = content.scan(/create_table\s+"(\w+)"/)
-      matches.map(&:first).reject { |table| table.start_with?('action_', 'active_') }
+      if options[:model_name]
+        extract_fields(content, options[:model_name])
+      else
+        extract_tables(content)
+      end
     rescue Errno::ENOENT
-      raise "Schema file_path not found at #{file_path}"
+      Kolla.logger.warn "Schema file_path not found at #{file_path}"
     end
 
     private
 
-    attr_reader :file_path
+    def extract_tables(schema)
+      matches = schema.scan(/create_table\s+"(\w+)"/)
+      matches.map(&:first).reject { |table| table.start_with?('action_', 'active_') }
+    end
+
+    def extract_fields(schema, table_name)
+      table_regex = /create_table "#{table_name}".*?do \|t\|(.*?)end/m
+      match = schema.match(table_regex)
+      return [] unless match
+
+      field_regex = /t\.\w+\s+"(\w+)"/
+      match[1].scan(field_regex).flatten
+    end
+
+    attr_reader :file_path, :options
   end
 end

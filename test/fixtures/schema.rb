@@ -12,6 +12,8 @@ end
 
 create_table "users" do |t|
   t.string "name"
+  t.bigint "life_in_seconds"
+  t.datetime "created_at", null: false
 end
 
 create_table "posts" do |t|
