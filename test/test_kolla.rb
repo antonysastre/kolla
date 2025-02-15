@@ -16,7 +16,7 @@ class KollaTest < Minitest::Test
 
   def test_options_parsing
     result = Kolla::Parser.new(file_path: 'test/fixtures/schema.rb', options: { model_name: 'users' } ).run!
-    assert_equal ["name", "life_in_seconds", "created_at"], result
+    assert_equal ["name (string)", "life_in_seconds (bigint)", "created_at (datetime)"], result
   end
 
   def test_ignore_pattern

@@ -32,8 +32,8 @@ module Kolla
       match = schema.match(table_regex)
       return [] unless match
 
-      field_regex = /t\.\w+\s+"(\w+)"/
-      match[1].scan(field_regex).flatten
+      field_regex = /t\.(\w+)\s+"(\w+)"/
+      match[1].scan(field_regex).map { |type, name| "#{name} (#{type})" }
     end
 
     attr_reader :file_path, :options

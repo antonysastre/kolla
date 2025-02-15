@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'kolla'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.authors     = ["Antony Sastre"]
   s.email       = 'antony.sastre@gmail.com'
   s.summary     = "Simple CLI utility tool to parse domain specific files and return reports."
